@@ -1,7 +1,7 @@
 import time
 from random import randint
 from rpi_ws281x import *
- 
+
 # LED strip configuration:
 LED_COUNT      = 270      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
@@ -15,8 +15,8 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 def fullstrip(strip, color):
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
-        strip.show()
-        
+    strip.show()
+
 def fire(strip):
     for i in range(strip.numPixels()):
         x = randint(0,strip.numPixels()-1)
@@ -35,19 +35,19 @@ def fire(strip):
         strip.show()
         # time.sleep(randint(0,200)/1000.0)
         # time.sleep(randint(0,200)/50000.0)
-                
- 
+
+
 # Main program logic follows:
 if __name__ == '__main__':
     strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
     strip.begin()
- 
+
     print ('Press Ctrl-C to quit.')
- 
+
     try:
- 
+
         while True:
             fire(strip)
- 
+
     except KeyboardInterrupt:
             fullstrip(strip, Color(0,0,0))
